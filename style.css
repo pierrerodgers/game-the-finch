@@ -25,6 +25,13 @@ body {
     font-size: 30px;
 }
 
+.built-by-pierre {
+    display: grid;
+    color:white;
+    font-size: 1.2rem;
+    justify-content: center;
+}
+
 .game-the-finch-title{
     background: url('./image.jpg');
     background-size:cover;
