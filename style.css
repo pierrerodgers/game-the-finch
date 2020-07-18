@@ -1,0 +1,24 @@
+.main-grid {
+    display:grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 100px);
+}
+
+.img1{
+    background: url('./image.jpg');
+    background-size:cover;
+    grid-column: 1/3;
+    grid-row: 1/2;
+}
+.img2{
+    background: url('./image.jpg');
+    background-size:cover;
+    grid-column: 4/6;
+    grid-row: 4/5;
+}
+.img3{
+    background: url('./image.jpg');
+    background-size:cover;
+    grid-column: 7/9;
+    grid-row: 3/4;
+}
