@@ -2,13 +2,27 @@
     display:grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(10, 6vw);
-
     column-gap: 0;
     row-gap: 0;
 }
+body {
+    background-color: black;
+    margin:0px;
+}
 
 .footer {
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
 
+.social-media {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    column-gap: 5vw;
+    background-color: white;
+    font-size: 30px;
 }
 
 .game-the-finch-title{
@@ -18,13 +32,30 @@
     height:fit-content;
     grid-row: span 3;
 }
+
 .maude-music-videos{
     background: url('./image.jpg');
     background-size:cover;
     grid-column: 4/6;
 }
+
 .documentaries{
     background: url('./image.jpg');
     background-size:cover;
     grid-column: 7/9;
+    grid-row: 5/ span 2;
+}
+
+.sankyo-stream{
+    background: url('./image.jpg');
+    background-size:cover;
+    grid-column: 18/20;
+    grid-row: 5/7;
+}
+
+.telling-george{
+    background: url('./image.jpg');
+    background-size:cover;
+    grid-column: 4/6;
+    grid-row: 8/10;
 }
