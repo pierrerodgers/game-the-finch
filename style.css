@@ -74,11 +74,27 @@ img{
 #music-videos:hover + #music-videos-detail{
     display:block;
 }
-
 #music-videos-detail:hover {
     display:block;
 }
-
+#writings:hover + #writings-detail{
+    display:block;
+}
+#writings-detail:hover {
+    display:block;
+}
+#telling-george:hover + #telling-george-detail{
+    display:block;
+}
+#telling-george-detail:hover {
+    display:block;
+}
+#fafdm:hover + #fafdm-detail{
+    display:block;
+}
+#fafdm-detail:hover {
+    display:block;
+}
 
 
 
@@ -86,12 +102,23 @@ img{
     grid-column: 10/ span 5;
     grid-row: 9/span 2;
 }
+#game-the-finch-title{
+    background: url('./image.jpg');
+    background-size:cover;
+    grid-column: 7/13;
+    grid-row: 4 /span 4;
+}
+
+
 
 #writings {
     grid-column: 3 /span 5;
     grid-row: 6 /span 4;
 }
-
+#writings-detail {
+    grid-column: 4/span 6;
+    grid-row: 5/span 3;
+}
 #music-videos{
     grid-column: 15 / span 4;
     grid-row: 7/span 4;
@@ -109,21 +136,19 @@ img{
     grid-column:16/span 5;
     grid-row: 1/span 5;
 }
-
-#game-the-finch-title{
-    background: url('./image.jpg');
-    background-size:cover;
-    grid-column: 7/13;
-    grid-row: 4 /span 4;
-}
-
 #telling-george{
     grid-column: 2/span 5;
     grid-row:2 / span 4;
 }
-
-
+#telling-george-detail {
+    grid-column: 4 / span 5;
+    grid-row: 1 /span 3;
+}
 #fafdm{
     grid-column: 13/ span 4;
     grid-row: 1 / span 4;
+}
+#fafdm-detail {
+    grid-column: 14 /span 7;
+    grid-row: 1/ span 3;
 }
