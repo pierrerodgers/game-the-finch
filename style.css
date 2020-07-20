@@ -54,8 +54,14 @@ img{
     color:white;
 }
 .detail-text {
+    font-family: adobe-caslon-pro, serif;
+    font-size: 2.1vh;
     padding: 15%;
     padding-top:5%;
+}
+.detail-text > h3 {
+    font-weight: bold;
+    padding-bottom: 0; margin-bottom: 0;
 }
 
 #sankyo-stream:hover + #sankyo-stream-detail{
