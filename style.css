@@ -55,7 +55,7 @@ img{
 }
 .detail-text {
     font-family: adobe-caslon-pro, serif;
-    font-size: 2.1vh;
+    font-size: 1.3vw;
     padding: 15%;
     padding-top:5%;
 }
@@ -93,21 +93,21 @@ img{
 }
 
 #music-videos{
-    grid-column: 14 / span 4;
+    grid-column: 15 / span 4;
     grid-row: 7/span 4;
 }
 #music-videos-detail{
-    grid-column: 16/span 4;
+    grid-column: 17/span 4;
     grid-row: 6/span 3;
 }
 
 #sankyo-stream{
-    grid-column: 14/span 4;
+    grid-column: 15/span 4;
     grid-row: 5/ span 2;
 }
 #sankyo-stream-detail {
-    grid-column:15/span 5;
-    grid-row: 2/span 4;
+    grid-column:16/span 5;
+    grid-row: 1/span 5;
 }
 
 #game-the-finch-title{
@@ -124,6 +124,6 @@ img{
 
 
 #fafdm{
-    grid-column: 12/ span 4;
+    grid-column: 13/ span 4;
     grid-row: 1 / span 4;
 }
