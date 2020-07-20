@@ -15,13 +15,18 @@ img{
     max-height: 100%;
 }
 
+a {
+    color:inherit;
+    text-decoration: none;
+}
+
 .footer {
     position:fixed;
     bottom:0;
     width:100%;
 }
 
-.social-media > div > img {
+.social-media img {
     justify-content: center;
     align-content: center;
     max-height: 40px;
