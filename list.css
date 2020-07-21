@@ -28,7 +28,7 @@
 .list {
     display:grid;
     grid-auto-flow: row;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
     column-gap: 0px;
     padding-bottom:10vh;
@@ -79,4 +79,10 @@ h2 {
 hr{
     color:white;
     width:90%;
+}
+
+@media only screen and (min-width: 768px) {
+    .list {
+        grid-template-columns: 1fr 1fr;
+    }
 }
