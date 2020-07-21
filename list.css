@@ -37,7 +37,6 @@
     font-family: adobe-caslon-pro, serif;
 }
 .writings-list {
-    grid-template-columns: 1fr;
     padding-right: 10%;
     padding-left:10%;
 }
@@ -84,5 +83,8 @@ hr{
 @media only screen and (min-width: 768px) {
     .list {
         grid-template-columns: 1fr 1fr;
+    }
+    .writings-list {
+        grid-template-columns: 1fr;
     }
 }
