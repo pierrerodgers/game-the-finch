@@ -28,7 +28,7 @@
 .list {
     display:grid;
     grid-auto-flow: row;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-template-rows: auto;
     column-gap: 0px;
     padding-bottom:10vh;
