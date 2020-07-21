@@ -24,6 +24,7 @@ a {
     position:fixed;
     bottom:0;
     width:100%;
+    font-family: adobe-caslon-pro, serif;
 }
 
 .social-media img {
@@ -39,7 +40,7 @@ a {
     column-gap: 2vw;
     background-color: white;
     font-size: 30px;
-    max-height:40px
+    max-height:40px;
 }
 
 #built-by-pierre {
