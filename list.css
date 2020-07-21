@@ -31,13 +31,14 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     column-gap: 0px;
-    //padding-bottom:200px;
+    padding-bottom:10vh;
     padding-top:0px;
     color:white;
     font-family: adobe-caslon-pro, serif;
 }
 
 .list-item {
+    padding:5%;
     height:auto;
     padding-bottom:10%;
 }
