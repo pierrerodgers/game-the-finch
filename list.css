@@ -1,0 +1,24 @@
+.list-header {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    color: white;
+}
+
+.list-description {
+    padding: 8vw;
+    text-align: center;
+    font-size: 1.3em;
+    padding-top:5px;
+}
+
+.list-title img {
+    width: 50%;
+    height: auto;
+    display:block;
+    margin:0 auto;
+}
+
+.list-title {
+    margin-bottom: 0px;
+}
