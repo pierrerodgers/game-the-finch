@@ -36,11 +36,27 @@
     color:white;
     font-family: adobe-caslon-pro, serif;
 }
+.writings-list {
+    display:grid;
+    grid-auto-flow: row;
+    grid-template-rows: auto;
+    column-gap: 0px;
+    padding-bottom:10vh;
+    padding-top:0px;
+    color:white;
+    font-family: adobe-caslon-pro, serif;
+    padding-right: 10%;
+    padding-left:10%;
+}
 
 .list-item {
     padding:5%;
     height:auto;
     padding-bottom:10%;
+}
+.writings-list .list-item {
+    padding-top:0;
+    padding-bottom: 0;
 }
 .embedded-vimeo iframe {
     border: 0;
@@ -62,4 +78,12 @@
 .list h2 {
     margin-bottom:0px;
     padding-bottom: 0px;
+}
+h2 {
+    margin-bottom:0px;
+}
+
+hr{
+    color:white;
+    width:90%;
 }
