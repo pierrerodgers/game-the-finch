@@ -43,6 +43,7 @@ a {
 }
 
 #built-by-pierre {
+    padding-top:1vh;
     display: grid;
     background-color: black;
     color:white;
