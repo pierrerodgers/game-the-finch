@@ -37,14 +37,7 @@
     font-family: adobe-caslon-pro, serif;
 }
 .writings-list {
-    display:grid;
-    grid-auto-flow: row;
-    grid-template-rows: auto;
-    column-gap: 0px;
-    padding-bottom:10vh;
-    padding-top:0px;
-    color:white;
-    font-family: adobe-caslon-pro, serif;
+    grid-template-columns: 1fr;
     padding-right: 10%;
     padding-left:10%;
 }
