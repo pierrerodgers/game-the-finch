@@ -11,6 +11,12 @@
     text-align: center;
     font-size: 1.3em;
     padding-top:5px;
+    width: 80vw;
+}
+
+
+.return-button img {
+    max-height: 10vh;
 }
 
 .list-title img {
