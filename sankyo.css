@@ -1,0 +1,149 @@
+body {
+    background-color: white;
+}
+
+#header-desktop {
+    background-image:url("/images/sankyo-stream/header-desktop.png");
+    width:100%;
+    height:0;
+    display: inline-block;
+    position: relative;
+    background-size: contain;
+    margin: 0 auto;
+    display:none;
+}
+
+
+.content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#header-desktop #back-image {
+    padding-left: 3vw;
+    width:18vw;
+}
+
+#header #back-image {
+    padding-left:3vw;
+    width:40%;
+}
+
+#header-vimeo {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#header-vimeo-mobile {
+    display: flex;
+    justify-content: center;
+    padding-top:180%;
+}
+
+
+#header-vimeo iframe {
+    border: 0;
+    height: 50%;
+    padding-left:20%;
+}
+
+#header-vimeo-mobile iframe {
+    border:0;
+    width:80%;
+    margin: 0 auto;
+    left: auto;
+}
+
+
+#header {
+    background-image: url("/images/sankyo-stream/header.png");
+    width:100%;
+    height:0;
+    display: inline-block;
+    position: relative;
+    background-size: contain;
+    margin: 0 auto;
+    padding-top:177%;
+}
+
+.main-content {
+    font-family:'Helvetica', 'Arial', sans-serif;
+    padding:1vw;
+    display:flex;
+    flex-direction: column;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.main-content p {
+    font-size: large;
+}
+
+.main-content picture.heading {
+    margin: 0 auto;
+    height:100%;
+}
+
+.main-content div.heading {
+    height: 40vw;
+    max-height:400px;
+    justify-content: center;
+    display: flex;
+}
+
+div .image-grid {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-grid img {
+    height:500px;
+}
+
+
+.text-wrap img {
+    float:right;
+    max-height:500px;
+}
+
+.main-content picture {
+    margin: 0 auto;
+}
+
+.blue-background {
+    background-color: #94d1de;
+    max-width: 100%;
+}
+
+.medium-img {
+    width:500px;
+    height:auto;
+    margin:0 auto;
+}
+
+.list {
+    background-color: black;
+}
+.list-header {
+    padding-top:50px;
+    background-color: black;
+}
+
+
+
+@media only screen and (min-width: 800px) {
+    #header-desktop {
+        visibility: visible;
+        padding-top:56.25%;
+        display: block;
+    }
+
+    #header {
+        display:none;
+    }
+}
