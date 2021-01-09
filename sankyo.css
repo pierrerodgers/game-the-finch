@@ -114,15 +114,12 @@ div .image-grid {
 
 .text-wrap img {
     float:left;
-    max-height:500px;
+    height:500px;
 }
 
-.text-wrap-right img {
-    float:left;
-    max-width:400px;
+.sarah-text img {
+    width:200px;
 }
-
-
 
 .main-content picture {
     margin: 0 auto;
@@ -253,10 +250,17 @@ div .image-grid {
         }
       
       .sarah-text { 
-        margin-top:-50px;  
+        margin-top:0px;  
         grid-area: 5 / 6 / 11 / 9; 
         }
+
+        .sarah-text img {
+            max-width:500px;
+        }
       
+        .sarah-text-mobile {
+            display:none;
+        }
       .joan-text { 
           grid-area: 4 / 1 / 10 / 6; 
           margin-top:-50px;
