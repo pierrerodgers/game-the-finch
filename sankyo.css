@@ -210,7 +210,7 @@ div .image-grid {
       .grid-1 {
         display: grid;
         grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(19, 150px);
+        grid-template-rows: 150px 150px 150px 150px 150px 150px 150px 150px 150px 150px 150px 500px;
         gap: 5px 5px;
         width:1080px;
         margin: 0 auto;
@@ -251,15 +251,15 @@ div .image-grid {
       
       .joan-text { 
           grid-area: 4 / 1 / 10 / 6; 
-          margin-top:-50px
+          margin-top:-50px;
         }
       
       .mac-text { 
-          grid-area: 9 / 1 / 17 / 5;
-        padding-top:25px; }
-      
+          grid-area: 10 / 1 / 17 / 6;
+          margin-top: -80px;
+      }      
       .point-reyes-image { 
-          grid-area: 11 / 5 / 17 / 9;  
+          grid-area: 12 / 2 / 17 / 8;  
             margin-top:-20px;
         }
           
