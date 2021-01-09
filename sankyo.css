@@ -4,6 +4,10 @@ body {
 
 }
 
+a {
+    font-weight: bold;
+}
+
 #header-desktop {
     background-image:url("/images/sankyo-stream/header-desktop.png");
     width:100%;
