@@ -241,7 +241,7 @@ div .image-grid {
     display:flex;
     flex-flow: row;
 
-        }
+    }
       
       .process-heading { 
           grid-area: 3 / 5 / 6 / 9; 

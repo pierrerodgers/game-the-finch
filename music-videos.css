@@ -75,6 +75,7 @@
     position: absolute;
     top: 0;
     width: 100%;
+    padding-top: 15%;
 }
 .header-embedded-vimeo {
     padding-top: 56.25%;
