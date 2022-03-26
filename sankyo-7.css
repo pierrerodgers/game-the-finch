@@ -151,23 +151,7 @@
     }
 
 
-    #lyla-isabel{
-        grid-column: 11/ span 2;
-        grid-row: 6 / span 5;
-    }
-    #lyla-isabel-bubble{
-        grid-column: 13 /span 10;
-        grid-row: 4/ span 4;
-    }
-    #lyla-isabel:hover + #lyla-isabel-bubble{
-        display:block;
-        background-image: url(/images/Blylaisabel.png);
-    }
-    #lyla-isabel-bubble:hover {
-        display: block;
-        background-image: url(/images/Blylaisabel.png);
-
-    }
+    
     
 
     #ron{
@@ -225,7 +209,7 @@
     }
 
     #janeraf{
-        grid-column: 8/ span 4;
+        grid-column: 8/ span 3;
         grid-row: 7 / span 3;
     }
     #janeraf-bubble{
@@ -257,6 +241,24 @@
     #jessejustin-bubble:hover {
         display: block;
         background-image: url(/images/Bjessejustin.png);
+
+    }
+
+    #lyla-isabel{
+        grid-column: 11/ span 2;
+        grid-row: 6 / span 5;
+    }
+    #lyla-isabel-bubble{
+        grid-column: 12 /span 8;
+        grid-row: 5/ span 4;
+    }
+    #lyla-isabel:hover + #lyla-isabel-bubble{
+        display:block;
+        background-image: url(/images/Blylaisabel.png);
+    }
+    #lyla-isabel-bubble:hover {
+        display: block;
+        background-image: url(/images/Blylaisabel.png);
 
     }
 
