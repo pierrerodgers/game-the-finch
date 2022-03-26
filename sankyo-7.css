@@ -12,6 +12,14 @@
     display: none;
 }
 
+.sankyo-7-back-mobile{
+    padding-right: 80%;
+    max-height: 80px;
+}
+.sankyo-7-back-mobile-header{
+    background-color: black;
+}
+
 @media only screen and (min-width: 768px) {
     .grid-mobile {
         display: none;
@@ -53,6 +61,12 @@
         color:white;
     }
 
+
+
+    #back-button {
+        grid-column: 2/ span 3;
+        grid-row: 2/ span 2;
+    }
 
 
     #momo-joanie{
