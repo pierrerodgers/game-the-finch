@@ -1,4 +1,22 @@
+.grid-mobile {
+    color:black;
+    display: block;
+    padding-bottom: 80px; 
+}
+.detail-text {
+    color:black;
+    font-family: Arial Black, Arial Bold, sans-serif;
+}
+
+.main-grid {
+    display: none;
+}
+
 @media only screen and (min-width: 768px) {
+    .grid-mobile {
+        display: none;
+    }
+    
     .main-grid {
         display:grid;
         grid-template-columns: repeat(20, 1fr);
@@ -30,8 +48,9 @@
         padding: 10%;
         padding-top:5%;
         padding-left:45%;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1vw;
+        font-family: Arial Black, Arial Bold, sans-serif;
+        font-size: 0.8vw;
+        color:white;
     }
 
 
