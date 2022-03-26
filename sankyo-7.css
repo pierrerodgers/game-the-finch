@@ -27,110 +27,14 @@
         color:white;
     }
     .detail-text {
-        font-size: 1.3vw;
         padding: 10%;
         padding-top:5%;
         padding-left:45%;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
+        font-size: 1vw;
     }
 
 
-
-
-    #creative-production {
-        padding-bottom:0;
-    }
-    #creative-production img {
-        max-width: 100%;
-    }
-
-    #sankyo-stream:hover + #sankyo-stream-detail{
-        display:block;
-    }
-    
-    #sankyo-stream-detail:hover {
-        display:block;
-    }
-    #music-videos:hover + #music-videos-detail{
-        display:block;
-    }
-    #music-videos-detail:hover {
-        display:block;
-    }
-    #writings:hover + #writings-detail{
-        display:block;
-    }
-    #writings-detail:hover {
-        display:block;
-    }
-    #telling-george:hover + #telling-george-detail{
-        display:block;
-    }
-    #telling-george-detail:hover {
-        display:block;
-    }
-    #fafdm:hover + #fafdm-detail{
-        display:block;
-    }
-    #fafdm-detail:hover {
-        display:block;
-    }
-    
-    
-    
-    #creative-production {
-        grid-column: 10/ span 5;
-        grid-row: 9/span 2;
-    }
-    #game-the-finch{
-        grid-column: 7/span 7;
-        grid-row: 3 /span 7;
-    }
-    
-    
-    
-    #writings {
-        grid-column: 3 /span 5;
-        grid-row: 6 /span 4;
-    }
-    #writings-detail {
-        grid-column: 4/span 6;
-        grid-row: 5/span 3;
-    }
-    #music-videos{
-        grid-column: 15 / span 4;
-        grid-row: 7/span 4;
-    }
-    #music-videos-detail{
-        grid-column: 17/span 4;
-        grid-row: 6/span 3;
-    }
-    
-    #sankyo-stream{
-        grid-column: 15/span 4;
-        grid-row: 5/ span 2;
-    }
-    #sankyo-stream-detail {
-        grid-column:16/span 5;
-        grid-row: 1/span 5;
-    }
-    #telling-george{
-        grid-column: 2/span 5;
-        grid-row:2 / span 4;
-    }
-    #telling-george-detail {
-        grid-column: 4 / span 5;
-        grid-row: 1 /span 3;
-    }
-    #fafdm{
-        grid-column: 13/ span 4;
-        grid-row: 1 / span 4;
-    }
-    #fafdm-detail {
-        grid-column: 14 /span 7;
-        grid-row: 1/ span 3;
-    }
 
     #momo-joanie{
         grid-column: 8/ span 3;
@@ -213,7 +117,7 @@
         grid-row: 7 / span 3;
     }
     #janeraf-bubble{
-        grid-column: 11 /span 7;
+        grid-column: 11 /span 8;
         grid-row: 7/ span 4;
     }
     #janeraf:hover + #janeraf-bubble{
