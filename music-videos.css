@@ -24,8 +24,8 @@
 
 #header-vimeo iframe {
     border: 0;
-    height: 43%;
-    width:43%;
+    height: 68%;
+    width: 43%;
     padding-right:50%;
 }
 
@@ -77,11 +77,12 @@
     width: 100%;
     padding-top: 5%;
 }
+/*
 .header-embedded-vimeo {
-    padding-top: 56.25%;
+    padding-top: 56.85%;
     position: relative;
 }
-
+*/
 @media only screen and (min-width: 800px) {
     #header-desktop {
         visibility: visible;
