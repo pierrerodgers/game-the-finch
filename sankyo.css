@@ -38,6 +38,38 @@ a {
     margin-bottom: -5px;
 }
 
+#theend-banner {
+    background-image: url("/images/sankyo-stream/theend-banner-mobile.jpg");
+    width:100%;
+    height:0;
+    display: inline-block;
+    position: relative;
+    background-size: contain;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
+    padding-top: 177.777%;
+    margin-bottom: -5px;
+    justify-content: center;
+}
+
+#theend-gif {
+    position:absolute;
+    padding-top: 2%;
+    top: 0;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#theend-gif img {
+    width: 75%;
+    height: 75%;
+    margin: auto;
+}
+
 .content {
     position: absolute;
     top: 0;
@@ -340,5 +372,23 @@ div .image-grid {
     #banner {
         padding-top: 19.79%;
         background-image: url("images/sankyo-stream/viii-banner.png");
+    }
+
+    #theend-banner {
+        background-image: url("/images/sankyo-stream/theend-banner.jpg");
+        padding-top: 56.25%;
+    }
+
+    #theend-gif {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    #theend-gif img {
+        padding-top: 8.5%;
+        padding-right: 56%;
+        width: 37%;
+        height: 37%;
     }
 }
