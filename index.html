@@ -17,9 +17,10 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width:30%;
-        max-width: 150px;
+        width:38%;
+        max-width: 250px;
         padding-left:60%;
+        padding-right: 5%;
     }
     .embedded-vimeo {
         width: 100%;
@@ -38,6 +39,15 @@
         max-width: 1080px;
         margin: 0 auto;
     }
+    #header-vimeo {
+        margin-bottom: -15%;
+    }
+
+    @media only screen and (min-width: 768px) {
+        #header-vimeo {
+            margin-bottom: 0;
+        }
+    }
 </style>
 
 
@@ -47,9 +57,11 @@
         <div id = "header-vimeo" class="embedded-vimeo">
             <iframe src="https://player.vimeo.com/video/802029609?&portrait=0&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
-        <a href="/home.html">
-            <img src="/images/theend-enter-site.png" class="enter-site" alt="Enter site">
-        </a>
+        <div>
+            <a href="/home.html">
+                <img src="/images/theend-enter-site.png" class="enter-site" alt="Enter site">
+            </a>
+        </div>
     </div>
 
 </body>
