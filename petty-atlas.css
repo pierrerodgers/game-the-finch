@@ -84,13 +84,16 @@
     #main-background {
         display: block;
         visibility: visible;
-        position: fixed;
+        /* position: fixed;
         top: 0;
         left: 0;
         bottom: 0;
-        right: 0;
-        overflow: auto;
-        background-size: contain;
+        right: 0; */
+        width: 100%;
+        height: 66vw;
+        max-height: fit-content;
+        overflow: hidden;
+        background-size: 100%;
         background-image: url("/images/petty-atlas/background.jpg");
         background-repeat: no-repeat;
     }
