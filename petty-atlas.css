@@ -1,13 +1,42 @@
 #main-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: auto;
+    visibility: hidden;
+}
+
+#main-background-mobile {
+    background-image: url("/images/petty-atlas/background-mobile.jpg");
+    width:100%;
+    height:0;
+    position: relative;
     background-size: contain;
-    background-image: url("/images/petty-atlas/background.jpg");
+    margin: 0 auto;
     background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
+    padding-top: 177.777%;
+    margin-bottom: -5px;
+    justify-content: center;
+}
+
+#mobile {
+    visibility: visible;
+    display: grid;
+    grid-auto-flow: row;
+}
+
+#mobile-content {
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#return-button-mobile {
+    width:30%;
+    padding-left: 5%;
+    padding-top: 5%;
 }
 
 #petty-atlas-gif {
@@ -25,14 +54,50 @@
     display: grid;
     gap: 10%;
     padding-left: 2%;
-    padding-top: 2%;
+    padding-top: 2%
 }
 
-#embed-stack {
+#embed-stack-mobile {
     display: grid;
     grid-auto-flow: column;
     gap: 5%;
-    width:50%;
-    padding-left: 45%;
-    padding-top: 10%;
+    padding-left: 2%;
+    padding-right: 2%;
+    position:absolute;
+    align-self: flex-end;
+    height: 20%;
+    bottom: 0;
+    padding-bottom: 20%;
+}
+
+#embed-stack-mobile iframe {
+    height: 100%;
+}
+
+@media only screen and (min-width: 800px) {
+    #mobile {
+        visibility: hidden;
+    }
+    
+    #main-background {
+        visibility: visible;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        overflow: auto;
+        background-size: contain;
+        background-image: url("/images/petty-atlas/background.jpg");
+        background-repeat: no-repeat;
+    }
+
+    #embed-stack {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 5%;
+        width:50%;
+        padding-left: 45%;
+        padding-top: 10%;
+    }
 }
