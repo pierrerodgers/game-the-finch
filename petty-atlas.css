@@ -13,7 +13,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: black;
-    padding-top: 177.777%;
+    padding-top:222%;
     margin-bottom: -5px;
     justify-content: center;
 }
@@ -22,6 +22,11 @@
     visibility: visible;
     display: grid;
     grid-auto-flow: row;
+    padding-bottom: 20%;
+}
+
+#mobile iframe {
+    max-height: 100px;
 }
 
 #mobile-content {
@@ -60,15 +65,15 @@
 
 #embed-stack-mobile {
     display: grid;
-    grid-auto-flow: column;
-    gap: 5%;
+    grid-auto-flow: row;
+    gap: 10%;
     padding-left: 2%;
     padding-right: 2%;
     position:absolute;
-    align-self: flex-end;
+    align-self: center;
     height: 20%;
-    bottom: 0;
-    padding-bottom: 20%;
+    bottom:0;
+    margin-bottom: 30%;
 }
 
 #embed-stack-mobile iframe {
