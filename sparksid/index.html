@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sparks ID</title>
+    <link rel="icon" type="image/png" href="/favicon.png"/>
+    <style>
+        @font-face {
+            font-family: 'Luna';
+            src: url('/sparks_assets/lunafont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: 'Luna', 'Comic Sans MS', 'Comic Sans', cursive;
+            min-height: 100vh;
+            overflow: hidden;
+            color: #000;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .questionnaire {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        /* --- Screen base & transitions --- */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 24px;
+            transform: translateX(100%);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .screen.active {
+            transform: translateX(0);
+        }
+
+        .screen.left {
+            transform: translateX(-100%);
+        }
+
+        /* first screen starts visible (no slide-in) */
+        .screen.initial {
+            transform: translateX(0);
+        }
+
+        /* --- GIF --- */
+        .gif-container {
+            width: 100%;
+            max-width: 350px;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Typography --- */
+        .question {
+            font-size: 1.7rem;
+            text-align: center;
+            margin-bottom: 28px;
+            max-width: 600px;
+            line-height: 1.4;
+            text-transform: lowercase;
+            word-spacing: 0.3em;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            text-align: center;
+            margin-bottom: 24px;
+            max-width: 520px;
+            line-height: 1.5;
+            text-transform: lowercase;
+            word-spacing: 0.3em;
+            letter-spacing: -0.03em;
+        }
+
+        .message {
+            font-size: 1.35rem;
+            text-align: center;
+            max-width: 520px;
+            line-height: 1.6;
+            text-transform: lowercase;
+            word-spacing: 0.3em;
+            letter-spacing: -0.03em;
+        }
+
+        .message a,
+        .subtitle a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* --- YES / NO buttons --- */
+        .buttons {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 160px;
+            height: auto;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            opacity: 0.85;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+            text-transform: lowercase;
+        }
+
+        /* --- Screening options --- */
+        .screening-options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .screening-option {
+            padding: 16px 24px;
+            border: 2px solid #000;
+            border-radius: 0;
+            font-family: 'Luna', 'Comic Sans MS', 'Comic Sans', cursive;
+            font-size: 1.15rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+            background: transparent;
+            color: #000;
+            -webkit-tap-highlight-color: transparent;
+            text-transform: lowercase;
+        }
+
+        .screening-option:hover {
+            background: #000;
+            color: #fff;
+            transform: scale(1.02);
+        }
+
+        .screening-option:active {
+            transform: scale(0.97);
+        }
+
+        /* --- Form inputs --- */
+        .form-group {
+            width: 100%;
+            max-width: 420px;
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 6px;
+            display: block;
+            text-transform: lowercase;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 0;
+            font-family: 'Luna', 'Comic Sans MS', 'Comic Sans', cursive;
+            font-size: 1.25rem;
+            border: none;
+            border-bottom: 2px solid #000;
+            background: transparent;
+            color: #000;
+            outline: none;
+            text-align: center;
+            border-radius: 0;
+            -webkit-appearance: none;
+            text-transform: lowercase;
+        }
+
+        .form-input::placeholder {
+            color: #bbb;
+        }
+
+        .form-input:focus {
+            border-bottom-color: #666;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 24px;
+            width: 100%;
+            max-width: 420px;
+            margin-bottom: 28px;
+            align-items: stretch;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row .form-label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- Photo upload --- */
+        .upload-area {
+            width: 180px;
+            height: 220px;
+            border: 2px dashed #000;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 28px;
+            transition: border-color 0.2s ease, background 0.2s ease;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .upload-area:hover {
+            background: #f7f7f7;
+        }
+
+        .upload-area.has-photo {
+            border-style: solid;
+        }
+
+        .upload-area.has-photo:hover {
+            opacity: 0.85;
+        }
+
+        .upload-area img.preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-icon {
+            font-size: 2.8rem;
+            line-height: 1;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .upload-text {
+            font-size: 0.85rem;
+            color: #888;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- NEXT button --- */
+        .next-btn {
+            cursor: pointer;
+            width: 140px;
+            height: auto;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            opacity: 0.3;
+            pointer-events: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .next-btn.enabled {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .next-btn.enabled:hover {
+            transform: scale(1.08);
+        }
+
+        .next-btn.enabled:active {
+            transform: scale(0.95);
+        }
+
+        /* --- Error messages --- */
+        .error-msg {
+            color: #c00;
+            font-size: 0.8rem;
+            min-height: 20px;
+            margin-bottom: 12px;
+            text-align: center;
+            transition: opacity 0.2s ease;
+            text-transform: lowercase;
+        }
+
+        /* --- Interstitial --- */
+        .interstitial-screen {
+            cursor: pointer;
+        }
+
+        .tap-hint {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease 1.5s forwards;
+        }
+
+        /* --- Confirmation --- */
+        .screen.active .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.7s ease 0.3s forwards;
+        }
+
+        /* --- Start over link --- */
+        .start-over {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #999;
+            cursor: pointer;
+            text-decoration: underline;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .start-over:hover {
+            color: #000;
+        }
+
+        /* --- Shake animation for invalid submit --- */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+
+        .shake {
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .screen {
+                padding: 24px 20px;
+            }
+
+            .question {
+                font-size: 1.35rem;
+                margin-bottom: 22px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .message {
+                font-size: 1.15rem;
+            }
+
+            .btn {
+                width: 135px;
+            }
+
+            .gif-container {
+                max-width: 260px;
+                margin-bottom: 20px;
+            }
+
+            .screening-option {
+                font-size: 1rem;
+                padding: 14px 18px;
+            }
+
+            .form-input {
+                font-size: 1.1rem;
+            }
+
+            .upload-area {
+                width: 150px;
+                height: 185px;
+            }
+
+            .next-btn {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .question {
+                font-size: 1.15rem;
+                margin-bottom: 18px;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                width: 115px;
+            }
+
+            .buttons {
+                gap: 16px;
+            }
+
+            .gif-container {
+                max-width: 200px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="questionnaire">
+
+        <!-- Screen 0: SXSW Attendance (with GIF) -->
+        <div class="screen active initial" id="screen-0">
+            <div class="gif-container">
+                <img src="/sparks_assets/id_configuration.gif" alt="Sparks ID">
+            </div>
+            <p class="question">Will you be attending SXSW this year?</p>
+            <div class="buttons">
+                <img src="/sparks_assets/yes_button.png" alt="Yes" class="btn" onclick="navigate(2)">
+                <img src="/sparks_assets/no_button.png" alt="No" class="btn" onclick="navigate(1)">
+            </div>
+        </div>
+
+        <!-- Screen 1: Dead End (NO) -->
+        <div class="screen" id="screen-1">
+            <p class="message">
+                This feature is only for SXSW attendees&mdash;for now! Stay tuned and follow
+                <a href="https://www.instagram.com/sparksmovieofficial/" target="_blank" rel="noopener">@sparksmovieofficial</a>
+                on socials to receive updates on when &ldquo;Sparks&rdquo; is screening in a city near you.
+            </p>
+            <span class="start-over" onclick="startOver()">&larr; Start over</span>
+        </div>
+
+        <!-- Screen 2: Screening Selection -->
+        <div class="screen" id="screen-2">
+            <p class="subtitle">
+                We're making custom Sparks IDs for anyone on the ground in Austin who comes to a screening of the film
+                (<a href="https://schedule.sxsw.com/2026/films/2249909" target="_blank" rel="noopener">see screening times here!</a>).
+            </p>
+            <p class="question">Which screening do you plan to attend?</p>
+            <div class="screening-options">
+                <button class="screening-option" onclick="selectScreening('Thursday, March 12 6:30pm')">Thursday, March 12 &mdash; 6:30pm</button>
+                <button class="screening-option" onclick="selectScreening('Friday, March 13 3:15pm')">Friday, March 13 &mdash; 3:15pm</button>
+                <button class="screening-option" onclick="selectScreening('Saturday, March 14 10:15pm')">Saturday, March 14 &mdash; 10:15pm</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Interstitial -->
+        <div class="screen interstitial-screen" id="screen-3" onclick="navigate(4)">
+            <p class="message fade-in">
+                Radical. Your answers to the following prompts will be used to create the ID, which does not belong to any state but instead the world of the film.
+            </p>
+            <span class="tap-hint">tap to continue &rarr;</span>
+        </div>
+
+        <!-- Screen 4: Name Entry -->
+        <div class="screen" id="screen-4">
+            <p class="question">To start, please enter your first and last name:</p>
+            <div class="form-group">
+                <input type="text" class="form-input" id="name-input" placeholder="First and last name" autocomplete="name">
+            </div>
+            <p class="error-msg" id="name-error"></p>
+            <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="name-next" onclick="submitName()">
+        </div>
+
+        <!-- Screen 5: Photo Upload -->
+        <div class="screen" id="screen-5">
+            <p class="question">Upload a &ldquo;DMV&rdquo; photo<br>(we're not picky!).</p>
+            <div class="upload-area" id="upload-area" onclick="document.getElementById('photo-input').click()">
+                <span class="upload-icon">+</span>
+                <span class="upload-text">tap to upload</span>
+            </div>
+            <input type="file" id="photo-input" accept="image/*" style="display:none">
+            <p class="error-msg" id="photo-error"></p>
+            <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="photo-next" onclick="submitPhoto()">
+        </div>
+
+        <!-- Screen 6: Punny Name Choice -->
+        <div class="screen" id="screen-6">
+            <p class="question">Your real name won't appear on this ID, but a punny alter ego.<br><br>Do you want us to pick this name for you?</p>
+            <div class="buttons">
+                <div class="btn-wrap">
+                    <img src="/sparks_assets/yes_button.png" alt="Yes" class="btn" onclick="choosePunny(true)">
+                    <span class="btn-label">pick for me!</span>
+                </div>
+                <div class="btn-wrap">
+                    <img src="/sparks_assets/no_button.png" alt="No" class="btn" onclick="choosePunny(false)">
+                    <span class="btn-label">I'll pick my own!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 7: Enter Punny Name -->
+        <div class="screen" id="screen-7">
+            <p class="question">Enter your punny alter ego:</p>
+            <div class="form-group">
+                <input type="text" class="form-input" id="punny-input" placeholder="Punny name">
+            </div>
+            <p class="error-msg" id="punny-error"></p>
+            <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="punny-next" onclick="submitPunny()">
+        </div>
+
+        <!-- Screen 8: Time Travel Destination -->
+        <div class="screen" id="screen-8">
+            <p class="question">Tell us your dream time travel destination</p>
+            <p class="subtitle">(for instance Paris in the year 1960!)</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Location of time travel</label>
+                    <input type="text" class="form-input" id="location-input" placeholder="e.g. Paris">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Year</label>
+                    <input type="text" class="form-input" id="year-input" placeholder="e.g. 1960">
+                </div>
+            </div>
+            <p class="error-msg" id="travel-error"></p>
+            <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="travel-next" onclick="submitTravel()">
+        </div>
+
+        <!-- Screen 9: Email -->
+        <div class="screen" id="screen-9">
+            <p class="question">Lastly, what's your email address?</p>
+            <p class="subtitle">No spam, just updates on where to pick up your ID!</p>
+            <div class="form-group">
+                <input type="email" class="form-input" id="email-input" placeholder="your@email.com" autocomplete="email">
+            </div>
+            <p class="error-msg" id="email-error"></p>
+            <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="email-next" onclick="submitEmail()">
+        </div>
+
+        <!-- Screen 10: Confirmation -->
+        <div class="screen" id="screen-10">
+            <p class="message fade-in">
+                You're all set! We'll see you in Austin. In the meantime, keep abreast of all Sparks updates and follow
+                <a href="https://www.instagram.com/sparksmovieofficial/" target="_blank" rel="noopener">@sparksmovieofficial</a>
+                on socials!
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- State ---
+        let currentScreen = 0;
+        const formData = {};
+
+        // --- Navigation ---
+        function navigate(to) {
+            const currentEl = document.getElementById('screen-' + currentScreen);
+            const nextEl = document.getElementById('screen-' + to);
+
+            if (!currentEl || !nextEl) return;
+
+            // Slide current screen out to the left
+            currentEl.classList.remove('active', 'initial');
+            currentEl.classList.add('left');
+
+            // Slide new screen in from the right
+            nextEl.classList.remove('left');
+            nextEl.classList.add('active');
+
+            currentScreen = to;
+
+            // Focus first input on form screens
+            setTimeout(function() {
+                var input = nextEl.querySelector('.form-input');
+                if (input) input.focus();
+            }, 650);
+        }
+
+        function startOver() {
+            // Reset all screens to initial positions
+            var screens = document.querySelectorAll('.screen');
+            screens.forEach(function(s) {
+                s.classList.remove('active', 'left', 'initial');
+            });
+
+            // Reset form data
+            Object.keys(formData).forEach(function(k) { delete formData[k]; });
+
+            // Reset all inputs
+            document.querySelectorAll('.form-input').forEach(function(i) { i.value = ''; });
+            document.querySelectorAll('.next-btn').forEach(function(b) { b.classList.remove('enabled'); });
+            document.querySelectorAll('.error-msg').forEach(function(e) { e.textContent = ''; });
+
+            // Reset upload area
+            var area = document.getElementById('upload-area');
+            area.classList.remove('has-photo');
+            area.innerHTML = '<span class="upload-icon">+</span><span class="upload-text">tap to upload</span>';
+
+            // Show first screen immediately (no slide)
+            var first = document.getElementById('screen-0');
+            first.classList.add('active', 'initial');
+            currentScreen = 0;
+        }
+
+        // --- Screening selection ---
+        function selectScreening(screening) {
+            formData.screening = screening;
+            navigate(3);
+        }
+
+        // --- Input validation helpers ---
+        function enableNext(btnId, condition) {
+            var btn = document.getElementById(btnId);
+            if (condition) {
+                btn.classList.add('enabled');
+            } else {
+                btn.classList.remove('enabled');
+            }
+        }
+
+        function shakeElement(el) {
+            el.classList.remove('shake');
+            void el.offsetWidth; // reflow
+            el.classList.add('shake');
+        }
+
+        // --- Sanitization & validation helpers ---
+        var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+        var allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/heic', 'image/heif'];
+        var maxFileSize = 10 * 1024 * 1024; // 10MB
+
+        function sanitizeText(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML.trim();
+        }
+
+        // --- Name ---
+        document.getElementById('name-input').addEventListener('input', function() {
+            enableNext('name-next', this.value.trim().length > 0);
+            document.getElementById('name-error').textContent = '';
+        });
+
+        document.getElementById('name-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') submitName();
+        });
+
+        function submitName() {
+            var val = sanitizeText(document.getElementById('name-input').value);
+            if (!val) {
+                document.getElementById('name-error').textContent = 'please enter your name.';
+                shakeElement(document.getElementById('name-input'));
+                return;
+            }
+            formData.name = val;
+            navigate(5);
+        }
+
+        // --- Photo ---
+        document.getElementById('photo-input').addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                var file = this.files[0];
+                var errorEl = document.getElementById('photo-error');
+
+                // Validate file type
+                if (allowedImageTypes.indexOf(file.type) === -1) {
+                    errorEl.textContent = 'please upload a valid image (jpg, png, gif, or webp).';
+                    shakeElement(document.getElementById('upload-area'));
+                    this.value = '';
+                    return;
+                }
+
+                // Validate file size
+                if (file.size > maxFileSize) {
+                    errorEl.textContent = 'image must be under 10mb.';
+                    shakeElement(document.getElementById('upload-area'));
+                    this.value = '';
+                    return;
+                }
+
+                // Validate it's actually an image by loading it
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.onload = function() {
+                        var area = document.getElementById('upload-area');
+                        area.innerHTML = '';
+                        var preview = document.createElement('img');
+                        preview.src = e.target.result;
+                        preview.alt = 'Your photo';
+                        preview.className = 'preview';
+                        area.appendChild(preview);
+                        area.classList.add('has-photo');
+                        enableNext('photo-next', true);
+                        formData.photo = file;
+                        errorEl.textContent = '';
+                    };
+                    img.onerror = function() {
+                        errorEl.textContent = 'file doesn\'t appear to be a valid image.';
+                        shakeElement(document.getElementById('upload-area'));
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function submitPhoto() {
+            if (!formData.photo) {
+                document.getElementById('photo-error').textContent = 'Please upload a photo.';
+                shakeElement(document.getElementById('upload-area'));
+                return;
+            }
+            navigate(6);
+        }
+
+        // --- Punny name choice ---
+        function choosePunny(autoGenerate) {
+            formData.punnyAuto = autoGenerate;
+            if (autoGenerate) {
+                navigate(8);
+            } else {
+                navigate(7);
+            }
+        }
+
+        // --- Punny name entry ---
+        document.getElementById('punny-input').addEventListener('input', function() {
+            enableNext('punny-next', this.value.trim().length > 0);
+            document.getElementById('punny-error').textContent = '';
+        });
+
+        document.getElementById('punny-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') submitPunny();
+        });
+
+        function submitPunny() {
+            var val = sanitizeText(document.getElementById('punny-input').value);
+            if (!val) {
+                document.getElementById('punny-error').textContent = 'please enter a punny name.';
+                shakeElement(document.getElementById('punny-input'));
+                return;
+            }
+            formData.punnyName = val;
+            navigate(8);
+        }
+
+        // --- Time travel ---
+        document.getElementById('location-input').addEventListener('input', validateTravel);
+        document.getElementById('year-input').addEventListener('input', validateTravel);
+
+        document.getElementById('location-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') document.getElementById('year-input').focus();
+        });
+        document.getElementById('year-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') submitTravel();
+        });
+
+        function validateTravel() {
+            var loc = document.getElementById('location-input').value.trim();
+            var year = document.getElementById('year-input').value.trim();
+            enableNext('travel-next', loc.length > 0 && year.length > 0);
+            document.getElementById('travel-error').textContent = '';
+        }
+
+        function submitTravel() {
+            var loc = sanitizeText(document.getElementById('location-input').value);
+            var year = sanitizeText(document.getElementById('year-input').value);
+            if (!loc || !year) {
+                document.getElementById('travel-error').textContent = 'please fill in both fields.';
+                if (!loc) shakeElement(document.getElementById('location-input'));
+                if (!year) shakeElement(document.getElementById('year-input'));
+                return;
+            }
+            formData.travelLocation = loc;
+            formData.travelYear = year;
+            navigate(9);
+        }
+
+        // --- Email ---
+        document.getElementById('email-input').addEventListener('input', function() {
+            enableNext('email-next', this.value.trim().length > 0);
+            document.getElementById('email-error').textContent = '';
+        });
+
+        document.getElementById('email-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') submitEmail();
+        });
+
+        // ── API config ──
+        // After running deploy.sh, paste your API URL here:
+        var API_BASE = 'https://g2dilhhr3k.execute-api.us-east-1.amazonaws.com';
+
+        function submitEmail() {
+            var val = sanitizeText(document.getElementById('email-input').value);
+            if (!val) {
+                document.getElementById('email-error').textContent = 'please enter your email address.';
+                shakeElement(document.getElementById('email-input'));
+                return;
+            }
+            if (!emailRegex.test(val)) {
+                document.getElementById('email-error').textContent = 'please enter a valid email address.';
+                shakeElement(document.getElementById('email-input'));
+                return;
+            }
+            formData.email = val;
+
+            // If no API configured, just log and advance (dev mode)
+            if (!API_BASE) {
+                console.log('Sparks ID Form Data:', JSON.stringify(formData, null, 2));
+                navigate(10);
+                return;
+            }
+
+            // Disable button and show submitting state
+            var btn = document.getElementById('email-next');
+            btn.classList.remove('enabled');
+            document.getElementById('email-error').textContent = '';
+
+            submitToBackend()
+                .then(function() {
+                    navigate(10);
+                })
+                .catch(function(err) {
+                    btn.classList.add('enabled');
+                    document.getElementById('email-error').textContent = err.message || 'something went wrong, please try again.';
+                    shakeElement(document.getElementById('email-input'));
+                });
+        }
+
+        function submitToBackend() {
+            var photoFile = formData.photo;
+
+            var fileType = photoFile.type || 'image/jpeg';
+
+            // Step 1: Get presigned upload URL
+            return fetch(API_BASE + '/upload-url', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contentType: fileType })
+            })
+            .then(function(res) {
+                if (!res.ok) throw new Error('failed to get upload url');
+                return res.json();
+            })
+            .then(function(data) {
+                var uploadUrl = data.uploadUrl;
+                var photoKey = data.photoKey;
+
+                // Step 2: Upload photo directly to S3
+                return fetch(uploadUrl, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': data.contentType },
+                    body: photoFile
+                })
+                .then(function(res) {
+                    if (!res.ok) throw new Error('photo upload failed');
+                    return photoKey;
+                });
+            })
+            .then(function(photoKey) {
+                // Step 3: Submit form data
+                var payload = {
+                    screening: formData.screening,
+                    name: formData.name,
+                    photoKey: photoKey,
+                    punnyAuto: formData.punnyAuto,
+                    travelLocation: formData.travelLocation,
+                    travelYear: formData.travelYear,
+                    email: formData.email
+                };
+                if (formData.punnyName) {
+                    payload.punnyName = formData.punnyName;
+                }
+
+                return fetch(API_BASE + '/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            })
+            .then(function(res) {
+                if (!res.ok) {
+                    return res.json().then(function(err) {
+                        throw new Error(err.error || 'submission failed');
+                    });
+                }
+                return res.json();
+            });
+        }
+    </script>
+</body>
+</html>
