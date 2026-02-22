@@ -346,6 +346,11 @@
             cursor: pointer;
         }
 
+        .cs {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            font-size: 1.35em;
+        }
+
         .tap-hint {
             font-size: 0.85rem;
             color: #aaa;
@@ -371,6 +376,21 @@
         }
 
         .start-over:hover {
+            color: #000;
+        }
+
+        /* --- Back arrow --- */
+        .back-arrow {
+            margin-top: 24px;
+            font-size: 1.4rem;
+            color: #aaa;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+
+        .back-arrow:hover {
             color: #000;
         }
 
@@ -500,8 +520,8 @@
         <!-- Screen 2: Screening Selection -->
         <div class="screen" id="screen-2">
             <p class="subtitle">
-                We're making custom Sparks IDs for anyone on the ground in Austin who comes to a screening of the film
-                (<a href="https://schedule.sxsw.com/2026/films/2249909" target="_blank" rel="noopener">see screening times here!</a>).
+                We're making custom Sparks IDs for anyone on the ground in&nbsp; Austin who comes to a screening of the film.<br><br>
+                <a href="https://schedule.sxsw.com/2026/films/2249909" target="_blank" rel="noopener">see screening times here!</a>
             </p>
             <p class="question">Which screening do you plan to attend?</p>
             <div class="screening-options">
@@ -509,14 +529,16 @@
                 <button class="screening-option" onclick="selectScreening('Friday, March 13 3:15pm')">Friday, March 13 &mdash; 3:15pm</button>
                 <button class="screening-option" onclick="selectScreening('Saturday, March 14 10:15pm')">Saturday, March 14 &mdash; 10:15pm</button>
             </div>
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 3: Interstitial -->
         <div class="screen interstitial-screen" id="screen-3" onclick="navigate(4)">
             <p class="message fade-in">
-                Radical. Your answers to the following prompts will be used to create the ID, which does not belong to any state but instead the world of the film.
+                Radical.<br><br>Your answers to the following prompts will be used to create the ID, which does not belong to any state but instead<br>the world of the film.
             </p>
             <span class="tap-hint">tap to continue &rarr;</span>
+            <span class="back-arrow" onclick="event.stopPropagation(); goBack()">&larr;</span>
         </div>
 
         <!-- Screen 4: Name Entry -->
@@ -527,6 +549,7 @@
             </div>
             <p class="error-msg" id="name-error"></p>
             <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="name-next" onclick="submitName()">
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 5: Photo Upload -->
@@ -539,6 +562,7 @@
             <input type="file" id="photo-input" accept="image/*" style="display:none">
             <p class="error-msg" id="photo-error"></p>
             <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="photo-next" onclick="submitPhoto()">
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 6: Punny Name Choice -->
@@ -554,6 +578,7 @@
                     <span class="btn-label">I'll pick my own!</span>
                 </div>
             </div>
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 7: Enter Punny Name -->
@@ -564,6 +589,7 @@
             </div>
             <p class="error-msg" id="punny-error"></p>
             <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="punny-next" onclick="submitPunny()">
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 8: Time Travel Destination -->
@@ -582,6 +608,7 @@
             </div>
             <p class="error-msg" id="travel-error"></p>
             <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="travel-next" onclick="submitTravel()">
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 9: Email -->
@@ -593,12 +620,13 @@
             </div>
             <p class="error-msg" id="email-error"></p>
             <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="email-next" onclick="submitEmail()">
+            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 10: Confirmation -->
         <div class="screen" id="screen-10">
             <p class="message fade-in">
-                You're all set! We'll see you in Austin. In the meantime, keep abreast of all Sparks updates and follow
+                You're all set!<br>We'll see you in Austin.<br><br>In the meantime, keep abreast of<br>all Sparks updates and follow
                 <a href="https://www.instagram.com/sparksmovieofficial/" target="_blank" rel="noopener">@sparksmovieofficial</a>
                 on socials!
             </p>
@@ -607,9 +635,32 @@
     </div>
 
     <script>
+        // --- Wrap special characters in Comic Sans ---
+        (function() {
+            function wrapSpecialChars(el) {
+                Array.from(el.childNodes).forEach(function(node) {
+                    if (node.nodeType === 3) { // text node
+                        var text = node.textContent;
+                        if (/[^a-z\s]/i.test(text)) {
+                            var html = text.replace(/([^a-z\s])/gi, '<span class="cs">$1</span>');
+                            var wrapper = document.createElement('span');
+                            wrapper.innerHTML = html;
+                            node.parentNode.replaceChild(wrapper, node);
+                        }
+                    } else if (node.nodeType === 1 && node.tagName !== 'BR' && node.tagName !== 'IMG' && node.tagName !== 'INPUT') {
+                        // Recurse into child elements (a, span, etc.)
+                        wrapSpecialChars(node);
+                    }
+                });
+            }
+            var targets = document.querySelectorAll('.question, .subtitle, .message, .btn-label, .screening-option, .tap-hint, .start-over, .form-label, .upload-text');
+            targets.forEach(wrapSpecialChars);
+        })();
+
         // --- State ---
         let currentScreen = 0;
         const formData = {};
+        var screenHistory = [0];
 
         // --- Navigation ---
         function navigate(to) {
@@ -627,12 +678,34 @@
             nextEl.classList.add('active');
 
             currentScreen = to;
+            screenHistory.push(to);
 
             // Focus first input on form screens
             setTimeout(function() {
                 var input = nextEl.querySelector('.form-input');
                 if (input) input.focus();
             }, 650);
+        }
+
+        function goBack() {
+            if (screenHistory.length < 2) return;
+            screenHistory.pop(); // remove current
+            var prev = screenHistory[screenHistory.length - 1];
+
+            var currentEl = document.getElementById('screen-' + currentScreen);
+            var prevEl = document.getElementById('screen-' + prev);
+
+            // Slide current off to the right, previous back from left
+            currentEl.classList.remove('active');
+            // Reset to default (off-screen right)
+            currentEl.style.transition = 'none';
+            currentEl.offsetHeight; // reflow
+            currentEl.style.transition = '';
+
+            prevEl.classList.remove('left');
+            prevEl.classList.add('active');
+
+            currentScreen = prev;
         }
 
         function startOver() {
