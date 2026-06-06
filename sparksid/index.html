@@ -163,40 +163,6 @@
             text-transform: lowercase;
         }
 
-        /* --- Screening options --- */
-        .screening-options {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            width: 100%;
-            max-width: 380px;
-        }
-
-        .screening-option {
-            padding: 16px 24px;
-            border: 2px solid #000;
-            border-radius: 0;
-            font-family: 'Luna', 'Comic Sans MS', 'Comic Sans', cursive;
-            font-size: 1.15rem;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-            background: transparent;
-            color: #000;
-            -webkit-tap-highlight-color: transparent;
-            text-transform: lowercase;
-        }
-
-        .screening-option:hover {
-            background: #000;
-            color: #fff;
-            transform: scale(1.02);
-        }
-
-        .screening-option:active {
-            transform: scale(0.97);
-        }
-
         /* --- Form inputs --- */
         .form-group {
             width: 100%;
@@ -422,11 +388,6 @@
                 padding: 24px 20px;
             }
 
-            #screen-2 {
-                justify-content: flex-start;
-                padding-top: 48px;
-            }
-
             .question {
                 font-size: 1.35rem;
                 margin-bottom: 22px;
@@ -447,11 +408,6 @@
             .gif-container {
                 max-width: 260px;
                 margin-bottom: 20px;
-            }
-
-            .screening-option {
-                font-size: 1rem;
-                padding: 14px 18px;
             }
 
             .form-input {
@@ -504,61 +460,14 @@
 <body>
     <div class="questionnaire">
 
-        <!-- Screen 0: SXSW Attendance (with GIF) -->
-        <div class="screen active initial" id="screen-0">
-            <div class="gif-container">
-                <img src="/sparks_assets/id_configuration.gif" alt="Sparks ID">
-            </div>
-            <p class="question">Will you be attending SXSW this year?</p>
-            <div class="buttons">
-                <img src="/sparks_assets/yes_button.png" alt="Yes" class="btn" onclick="navigate(2)">
-                <img src="/sparks_assets/no_button.png" alt="No" class="btn" onclick="navigate(1)">
-            </div>
-        </div>
-
-        <!-- Screen 1: Dead End (NO) -->
-        <div class="screen" id="screen-1">
-            <p class="message">
-                This feature is only for SXSW attendees&mdash;for now! Stay tuned and follow
-                <a href="https://www.instagram.com/sparksmovieofficial/" target="_blank" rel="noopener">@sparksmovieofficial</a>
-                on socials to receive updates on when &ldquo;Sparks&rdquo; is screening in a city near you.
-            </p>
-            <span class="start-over" onclick="startOver()">&larr; start over</span>
-        </div>
-
-        <!-- Screen 2: Screening Selection -->
-        <div class="screen" id="screen-2">
-            <p class="subtitle">
-                We're making custom Sparks IDs for anyone on the ground in&nbsp; Austin who comes to a screening of the film.<br><br>
-                <a href="https://schedule.sxsw.com/2026/films/2249909" target="_blank" rel="noopener">see screening times here!</a>
-            </p>
-            <p class="question">Which screening do you plan to attend?</p>
-            <div class="screening-options">
-                <button class="screening-option" onclick="selectScreening('Thursday, March 12 6:30pm')">Thursday<br>March 12<br>6:30PM</button>
-                <button class="screening-option" onclick="selectScreening('Friday, March 13 3:15pm')">Friday<br>March 13<br>3:15PM</button>
-                <button class="screening-option" onclick="selectScreening('Saturday, March 14 10:15pm')">Saturday<br>March 14<br>10:15PM</button>
-            </div>
-            <span class="back-arrow" onclick="goBack()">&larr;</span>
-        </div>
-
-        <!-- Screen 3: Interstitial -->
-        <div class="screen interstitial-screen" id="screen-3" onclick="navigate(4)">
-            <p class="message fade-in">
-                Radical.<br><br>Your answers to the following prompts will be used to create the ID, which does not belong to any state but instead<br>the world of the film.
-            </p>
-            <span class="tap-hint">tap to continue &rarr;</span>
-            <span class="back-arrow" onclick="event.stopPropagation(); goBack()">&larr;</span>
-        </div>
-
         <!-- Screen 4: Name Entry -->
-        <div class="screen" id="screen-4">
+        <div class="screen active initial" id="screen-4">
             <p class="question">To start, please enter your first and last name:</p>
             <div class="form-group">
                 <input type="text" class="form-input" id="name-input" placeholder="First and last name" autocomplete="name">
             </div>
             <p class="error-msg" id="name-error"></p>
             <img src="/sparks_assets/next_button.png" alt="Next" class="next-btn" id="name-next" onclick="submitName()">
-            <span class="back-arrow" onclick="goBack()">&larr;</span>
         </div>
 
         <!-- Screen 5: Photo Upload -->
@@ -662,14 +571,14 @@
                     }
                 });
             }
-            var targets = document.querySelectorAll('.question, .subtitle, .message, .btn-label, .screening-option, .tap-hint, .start-over, .form-label, .upload-text');
+            var targets = document.querySelectorAll('.question, .subtitle, .message, .btn-label, .tap-hint, .start-over, .form-label, .upload-text');
             targets.forEach(wrapSpecialChars);
         })();
 
         // --- State ---
-        let currentScreen = 0;
+        let currentScreen = 4;
         const formData = {};
-        var screenHistory = [0];
+        var screenHistory = [4];
 
         // --- Navigation ---
         function navigate(to) {
@@ -738,15 +647,10 @@
             area.innerHTML = '<span class="upload-icon">+</span><span class="upload-text">tap to upload</span>';
 
             // Show first screen immediately (no slide)
-            var first = document.getElementById('screen-0');
+            var first = document.getElementById('screen-4');
             first.classList.add('active', 'initial');
-            currentScreen = 0;
-        }
-
-        // --- Screening selection ---
-        function selectScreening(screening) {
-            formData.screening = screening;
-            navigate(3);
+            currentScreen = 4;
+            screenHistory = [4];
         }
 
         // --- Input validation helpers ---
@@ -1003,7 +907,6 @@
             .then(function(photoKey) {
                 // Step 3: Submit form data
                 var payload = {
-                    screening: formData.screening,
                     name: formData.name,
                     photoKey: photoKey,
                     punnyAuto: formData.punnyAuto,

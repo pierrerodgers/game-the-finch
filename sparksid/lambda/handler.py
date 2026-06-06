@@ -96,7 +96,7 @@ def submit(event):
 
     # Validate required fields
     errors = []
-    if not screening or screening not in ALLOWED_SCREENINGS:
+    if screening and screening not in ALLOWED_SCREENINGS:
         errors.append("invalid screening selection")
     if not name:
         errors.append("name is required")
@@ -131,7 +131,6 @@ def submit(event):
     submission_id = str(uuid.uuid4())
     item = {
         "id": submission_id,
-        "screening": screening,
         "name": name,
         "photoKey": photo_key,
         "punnyAuto": punny_auto,
@@ -140,6 +139,8 @@ def submit(event):
         "email": email,
         "submittedAt": datetime.now(timezone.utc).isoformat(),
     }
+    if screening:
+        item["screening"] = screening
     if punny_name:
         item["punnyName"] = punny_name
 
