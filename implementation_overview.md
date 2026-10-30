@@ -65,7 +65,7 @@ Within the bar, position 5 clickable GIF icons in order (left to right):
 2. **Reel** → https://vimeo.com/1081909242?fl=pl&fe=vl
    - "I am available for fire"
 
-3. **Book** → https://www.buildweekproductions.com/sankyostream/p/coffeetablebook
+3. **Book** → https://www.instagram.com/p/DImja2Dywcg/?img_index=1
    - "Sankyo Stream is a coffee table book"
 
 4. **Sparks** → /new-assets/Rager_Poster.jpg (or new page)
